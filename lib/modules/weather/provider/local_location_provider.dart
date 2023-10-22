@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/common/app_constants.dart';
 import 'package:weather_app/common/model/base_state.dart';
-import 'package:weather_app/common/model/current_weather_response.dart';
 import 'package:weather_app/common/model/location.dart';
 
 class LocalLocationsState extends BaseState {
