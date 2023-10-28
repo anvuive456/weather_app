@@ -9,7 +9,7 @@ class AppToast {
       title: message,
       duration: const Duration(seconds: 1),
       hideCloseButton: true,
-      backgroundColor: kPrimaryColor,
+      backgroundColor: AppColors.primary,
       borderRadius: 20.0,
     );
   }
@@ -19,7 +19,7 @@ class AppToast {
       title: message,
       duration: const Duration(seconds: 1),
       hideCloseButton: false,
-      backgroundColor: kDarkGrey,
+      backgroundColor: AppColors.darkGrey,
       borderRadius: 10.0,
       align: Alignment.bottomCenter,
     );
@@ -30,9 +30,9 @@ class AppToast {
       title: message,
       duration: const Duration(seconds: 2),
       hideCloseButton: false,
-      backgroundColor: kRedColor,
+      backgroundColor: AppColors.red,
       borderRadius: 10.0,
-      titleStyle: const TextStyle(color: kWhiteColor,fontSize: 14),
+      titleStyle: const TextStyle(color: AppColors.white,fontSize: 14),
       align: Alignment.bottomCenter,
     );
   }

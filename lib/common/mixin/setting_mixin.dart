@@ -10,7 +10,7 @@ mixin AppSettingMixin<S extends ConsumerStatefulWidget> on ConsumerState<S> {
       onTap: openSettings,
       child: const Icon(
         Icons.settings,
-        color: kWhiteColor,
+        color: AppColors.white,
       ));
 
   void openSettings() {

@@ -49,7 +49,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen>
                   AppButton(
                     child: Icon(
                       Icons.add_circle_outline,
-                      color: kWhiteColor,
+                      color: AppColors.white,
                     ),
                     onTap: () {
                       context.goNamed(RoutePaths.search);

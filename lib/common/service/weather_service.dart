@@ -36,7 +36,8 @@ class WeatherService {
 
     return switch (res) {
       SuccessResponse success => Future.value(
-          (success.data['forecast']['forecastday'] as List).map((e) => Forecast.fromMap(e)).toList()),
+          (success.data['forecast']['forecastday'] as List)
+              .map((e) => Forecast.fromMap(e)).toList()),
       ErrorResponse err => Future.error(err.detail),
       TimeOutResponse out => Future.error(out.message),
     };

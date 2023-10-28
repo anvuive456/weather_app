@@ -73,7 +73,7 @@ class _SearchLocationScreenState extends ConsumerState<SearchLocationScreen>
                           isDense: true,
                           hintStyle: TextStyle(
                             fontSize: 14,
-                            color: kGreyText,
+                            color: AppColors.greyText,
                           ),
                           hintText: AppString.hintSearchLocation,
                           contentPadding: const EdgeInsets.all(10),

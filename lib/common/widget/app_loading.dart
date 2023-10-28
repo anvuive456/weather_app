@@ -9,7 +9,7 @@ class CircleLoadingWidget extends StatelessWidget {
   const CircleLoadingWidget(
       {Key? key,
         this.message = '',
-        this.valueColor = kPrimaryColor,
+        this.valueColor = AppColors.primary,
         this.value})
       : super(key: key);
 
@@ -29,8 +29,8 @@ class CircleLoadingWidget extends StatelessWidget {
           dimension: 20,
           child: CircularProgressIndicator(
             value: value,
-            backgroundColor: kWhiteColor,
-            valueColor: const AlwaysStoppedAnimation<Color>(kPrimaryColor),
+            backgroundColor: AppColors.white,
+            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
             strokeWidth: 3,
           ),
         ),
@@ -39,7 +39,7 @@ class CircleLoadingWidget extends StatelessWidget {
           style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: kDarkGrey),
+              color: AppColors.darkGrey),
         )
       ],
     );

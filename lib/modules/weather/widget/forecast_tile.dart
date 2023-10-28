@@ -98,11 +98,11 @@ class ForecastHourTile extends ConsumerWidget with ConversionMixin {
           Icon(
             CupertinoIcons.umbrella_fill,
             size: 20,
-            color: kBlueColor,
+            color: AppColors.blue,
           ),
           Text(
             '${hour.willItRain}%',
-            style: TextStyle(fontSize: 16, color: kBlueColor),
+            style: TextStyle(fontSize: 16, color: AppColors.blue),
           ),
         ],
       ),

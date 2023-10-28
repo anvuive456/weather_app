@@ -31,3 +31,33 @@ flutter:
 
   uses-material-design: true
 
+  assets:
+    - assets/font/Raleway/static/
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/font/Raleway/static/Raleway-Black.ttf
+        - asset: assets/font/Raleway/static/Raleway-BlackItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Bold.ttf
+        - asset: assets/font/Raleway/static/Raleway-BoldItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-ExtraBold.ttf
+        - asset: assets/font/Raleway/static/Raleway-ExtraBoldItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-ExtraLight.ttf
+        - asset: assets/font/Raleway/static/Raleway-ExtraLightItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Italic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Light.ttf
+        - asset: assets/font/Raleway/static/Raleway-LightItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Medium.ttf
+        - asset: assets/font/Raleway/static/Raleway-MediumItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Regular.ttf
+        - asset: assets/font/Raleway/static/Raleway-SemiBold.ttf
+        - asset: assets/font/Raleway/static/Raleway-SemiBoldItalic.ttf
+        - asset: assets/font/Raleway/static/Raleway-Thin.ttf
+        - asset: assets/font/Raleway/static/Raleway-ThinItalic.ttf
+    - family: Noto_Sans_Kawi
+      fonts:
+        - asset: assets/font/Noto_Sans_Kawi/static/NotoSansKawi-Bold.ttf
+        - asset: assets/font/Noto_Sans_Kawi/static/NotoSansKawi-Medium.ttf
+        - asset: assets/font/Noto_Sans_Kawi/static/NotoSansKawi-Regular.ttf
+        - asset: assets/font/Noto_Sans_Kawi/static/NotoSansKawi-SemiBold.ttf

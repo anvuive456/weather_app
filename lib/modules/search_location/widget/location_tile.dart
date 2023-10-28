@@ -47,7 +47,7 @@ class LocationTile extends ConsumerWidget with ConversionMixin{
           children: [
             Text(location.country,style: const TextStyle(
               fontSize: 14,
-              color: kGreyText
+              color: AppColors.greyText
             ),),
             const SizedBox(height: 10,),
             Text(
@@ -58,7 +58,7 @@ class LocationTile extends ConsumerWidget with ConversionMixin{
               ),
               style: const TextStyle(
                 fontSize: 18,
-                  color: kDarkGrey,
+                  color: AppColors.darkGrey,
                   fontWeight: FontWeight.w800
               ),
             ),

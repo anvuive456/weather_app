@@ -25,7 +25,7 @@ List<TextSpan> highlightOccurrences(String source, String? query) {
     } else if (match.start <= lastMatchEnd) {
       children.add(TextSpan(
         text: source.substring(lastMatchEnd, match.end),
-        style: const TextStyle(fontWeight: FontWeight.bold, color: kBlackColor),
+        style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),
       ));
     } else if (match.start > lastMatchEnd) {
       children.add(TextSpan(
@@ -34,7 +34,7 @@ List<TextSpan> highlightOccurrences(String source, String? query) {
 
       children.add(TextSpan(
         text: source.substring(match.start, match.end),
-        style: const TextStyle(fontWeight: FontWeight.bold, color: kBlackColor),
+        style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),
       ));
     }
 

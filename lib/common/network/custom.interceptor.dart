@@ -19,12 +19,19 @@ class AppInterceptor implements InterceptorsWrapper {
             requestOptions: err.requestOptions, error: const TimeOutResponse());
         break;
       default:
-        nextErr = err.copyWith(
-            error: ErrorResponse(
-          errorCode: err.response?.statusCode ?? 0,
-          detail:
-              'ERROR: ${err.response?.statusCode} ${err.response?.data.toString()}',
-        ));
+        //handle 500 errors
+        if ((err.response?.statusCode ?? 0) >= 500) {
+          nextErr = err.copyWith(
+              error: ErrorResponse(
+                  errorCode: 0, detail: 'Cannot connect to service'));
+        } else {
+          nextErr = err.copyWith(
+              error: ErrorResponse(
+            errorCode: err.response?.statusCode ?? 0,
+            detail:
+                'ERROR: ${err.response?.statusCode} ${err.response?.data.toString()}',
+          ));
+        }
     }
     return handler.next(nextErr);
   }

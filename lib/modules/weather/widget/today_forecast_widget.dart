@@ -20,7 +20,7 @@ class TodayForecastWidget extends ConsumerWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: kLightGrey
+        color: AppColors.lightGrey
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +34,8 @@ class TodayForecastWidget extends ConsumerWidget {
           ),
           forecast.maybeWhen(
             error: (error, stackTrace) {
+              print(error);
+              print(stackTrace);
               return TextButton(onPressed: () {
                 ref.invalidate(todayForecastProvider(location));
               }, child: const Text(AppString.msgRefresh));

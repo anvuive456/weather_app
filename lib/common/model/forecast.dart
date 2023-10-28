@@ -72,7 +72,7 @@ class Astro {
   final String moonrise;
   final String moonset;
   final String moonPhase;
-  final String moonIllumination;
+  final int moonIllumination;
   final int isMoonUp;
   final int isSunUp;
 
@@ -100,7 +100,7 @@ class Astro {
       moonrise: map['moonrise'] ?? '',
       moonset: map['moonset'] ?? '',
       moonPhase: map['moonPhase'] ?? '',
-      moonIllumination: map['moon_illumination'] ?? '',
+      moonIllumination: map['moon_illumination'] ?? 0,
       isMoonUp: map['is_moonup'] ?? 0,
       isSunUp: map['is_sun_up'] ?? 0,
     );

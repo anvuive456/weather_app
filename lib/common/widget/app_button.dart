@@ -10,7 +10,7 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.child,
     required this.onTap,
-    this.buttonColor = kPrimaryColor,
+    this.buttonColor = AppColors.primary,
   });
 
   @override
