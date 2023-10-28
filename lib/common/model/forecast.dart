@@ -254,7 +254,7 @@ class HourForecast {
   final num uv;
   final AirQuality? airQuality;
 
-  DateTime get parsedTime => DateTime.fromMillisecondsSinceEpoch(timeEpoch);
+  DateTime get parsedTime => DateTime.parse(time);
 
 //<editor-fold desc="Data Methods">
   const HourForecast({
