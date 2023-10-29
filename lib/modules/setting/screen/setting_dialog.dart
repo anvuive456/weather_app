@@ -14,6 +14,8 @@ class SettingDialog extends ConsumerWidget {
         ref.watch(settingProvider.select((value) => value.degreeType));
     final currMeasure =
         ref.watch(settingProvider.select((value) => value.measureType));
+    final currLang =
+        ref.watch(settingProvider.select((value) => value.language));
     final settingNotifier = ref.read(settingProvider.notifier);
 
     return Dialog(
@@ -65,6 +67,28 @@ class SettingDialog extends ConsumerWidget {
                 }
               },
             ),
+          const Padding(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              AppString.settingLabelLanguage,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          for (final type in AppLanguage.values)
+            RadioListTile<AppLanguage>(
+              groupValue: currLang,
+              value: type,
+              title: Text(type.title),
+              onChanged: (value) {
+                if (value != null) {
+                  settingNotifier.changeLanguage(type);
+                }
+              },
+            ),
+
         ],
       ),
     );

@@ -60,10 +60,12 @@ class _SearchLocationScreenState extends ConsumerState<SearchLocationScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BackButton(onPressed: () {
-                      context.goNamed(RoutePaths.main);
-                    },),
-
+                    if (GoRouter.of(context).canPop())
+                      BackButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                      ),
                     Expanded(
                       flex: 13,
                       child: TextFormField(
@@ -104,7 +106,7 @@ class _SearchLocationScreenState extends ConsumerState<SearchLocationScreen>
 
     //if haven't entered any text
     if (state == const SearchLocationState.init()) {
-      return  const Center(
+      return const Center(
         child: Text(
           AppString.msgInitSearch,
           textAlign: TextAlign.center,
@@ -141,9 +143,12 @@ class _SearchLocationScreenState extends ConsumerState<SearchLocationScreen>
     );
   }
 
-  void _handleChooseLocation(Location item) {
-    ref.read(localLocationsProvider.notifier).addLocation(item);
-
-    context.goNamed(RoutePaths.main);
+  void _handleChooseLocation(Location item) async {
+    final notifier = ref.read(localLocationsProvider.notifier);
+    //Delay for done initializing prefs
+    await Future.delayed(Duration.zero, () async => notifier.addLocation(item));
+    if (mounted) {
+      context.goNamed(RoutePaths.main);
+    }
   }
 }

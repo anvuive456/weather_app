@@ -7,10 +7,11 @@ import 'package:weather_app/common/network/rest_api.dart';
 class WeatherService {
   final DioHttpProvider _api = const DioHttpProvider();
 
-  Future<CurrentWeather> getCurrent(double lat, double lon) async {
+  Future<CurrentWeather> getCurrent(double lat, double lon,{String lang = ''}) async {
     final req = {
       'q': '$lat,$lon',
       'aqi': 'yes',
+      if(lang.isNotEmpty) 'lang':lang,
     };
 
     final res = await _api.dioGetRequest(ApiPath.current, query: req);
@@ -24,10 +25,10 @@ class WeatherService {
   }
 
   Future<List<Forecast>> getForecasts(
-  double lat, double lon, {int days = 10, bool withAqi = false}) async {
+  double lat, double lon, {int days = 10, bool withAqi = false, String lang = ''}) async {
     final req = {
       'q': '$lat,$lon',
-
+      if(lang.isNotEmpty) 'lang':lang,
       'days': days,
       'aqi': withAqi ? 'yes' : 'no',
     };

@@ -10,6 +10,7 @@ import 'package:weather_app/common/widget/app_button.dart';
 import 'package:weather_app/modules/setting/provider/setting_provider.dart';
 import 'package:weather_app/modules/weather/provider/local_location_provider.dart';
 import 'package:weather_app/modules/weather/provider/weather_provider.dart';
+import 'package:weather_app/modules/weather/widget/air_quality_widget.dart';
 import 'package:weather_app/modules/weather/widget/seven_days_forecast_widget.dart';
 import 'package:weather_app/modules/weather/widget/today_forecast_widget.dart';
 import 'package:weather_app/modules/weather/widget/weather_stat_grid_tile.dart';
@@ -48,6 +49,9 @@ class _WeatherScreenState extends ConsumerState<WeatherPage>
     final degreeType =
         ref.watch(settingProvider.select((value) => value.degreeType));
 
+    final measureType =
+        ref.watch(settingProvider.select((value) => value.measureType));
+
     return RefreshIndicator.adaptive(
       onRefresh: () {
         return ref.refresh(weatherProvider(location).future);
@@ -76,18 +80,21 @@ class _WeatherScreenState extends ConsumerState<WeatherPage>
               height: 20,
             ),
             TodayForecastWidget(location),
+            if (weather.airQuality != null)
+              AirQualityWidget(aqi: weather.airQuality!),
             GridView(
               physics: NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  // width/height
+                  childAspectRatio: 2),
               children: [
                 WeatherStatGridTile(
-                  label: 'UV',
+                  label: 'UV Level',
                   stat: '${weather.uv} ',
                   description: '',
                 ),
@@ -96,8 +103,9 @@ class _WeatherScreenState extends ConsumerState<WeatherPage>
                     stat: '${weather.humidity}%',
                     description: ''),
                 WeatherStatGridTile(
-                    label: 'Humidity',
-                    stat: '${weather.humidity}%',
+                    label: 'Vision',
+                    stat: getMeasure(
+                        measureType, weather.visKm, weather.visMiles),
                     description: ''),
               ],
             ),

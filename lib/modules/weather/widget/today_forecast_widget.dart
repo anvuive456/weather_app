@@ -9,6 +9,7 @@ import 'package:weather_app/resources/string.dart';
 
 class TodayForecastWidget extends ConsumerWidget {
   final Location location;
+
   const TodayForecastWidget(this.location, {super.key});
 
   @override
@@ -19,33 +20,29 @@ class TodayForecastWidget extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.lightGrey
-      ),
+          borderRadius: BorderRadius.circular(10), color: AppColors.lightGrey),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             AppString.labelTodayForecast,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600
-            ),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           forecast.maybeWhen(
             error: (error, stackTrace) {
-              print(error);
-              print(stackTrace);
-              return TextButton(onPressed: () {
-                ref.invalidate(todayForecastProvider(location));
-              }, child: const Text(AppString.msgRefresh));
+              return TextButton(
+                  onPressed: () {
+                    ref.invalidate(todayForecastProvider(location));
+                  },
+                  child: const Text(AppString.msgRefresh));
             },
             orElse: () => const SizedBox.shrink(),
-            data:(data) =>  SingleChildScrollView(
+            data: (data) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  for (var hour in data.hour)
+                  for (var hour in data.hour.where((element) =>
+                      element.parsedTime.hour.compareTo(DateTime.now().hour)>=0))
                     ForecastHourTile(hour: hour)
                 ],
               ),

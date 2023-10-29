@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/common/app_constants.dart';
@@ -8,6 +10,8 @@ import 'package:weather_app/common/model/location.dart';
 
 class LocalLocationsState extends BaseState {
   final List<Location> locations;
+
+  bool get hasOneLeft => locations.length == 1;
 
 //<editor-fold desc="Data Methods">
   const LocalLocationsState.init({
@@ -54,8 +58,12 @@ class LocalLocationsNotifier extends StateNotifier<LocalLocationsState> {
   late SharedPreferences _prefs;
 
   void init() async {
-    _prefs = await SharedPreferences.getInstance();
+    await _initSharedPrefs();
     _getLocalLocations();
+  }
+
+  Future<void> _initSharedPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 
   void _getLocalLocations() async {
@@ -74,6 +82,9 @@ class LocalLocationsNotifier extends StateNotifier<LocalLocationsState> {
     state = state.copyWith(locations: locations);
   }
 
+  ///Sometime you get _prefs is not initialized
+  ///
+  /// Then you have to use Future wrapper like Future.delay in that function
   void addLocation(Location location) async {
     if (state.locations.contains(location)) {
       state = state.copyWith(error: 'This location is already added');

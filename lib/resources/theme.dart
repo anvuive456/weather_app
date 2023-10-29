@@ -4,7 +4,7 @@ import 'package:weather_app/resources/color.dart';
 final appTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
     useMaterial3: true,
-    fontFamily: 'Noto_Sans_Kawi',
+    // fontFamily: 'Noto_Sans_Kawi',
     textTheme: const TextTheme(
       displayLarge: TextStyle(
           fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),

@@ -8,9 +8,10 @@ class LocationService {
 
   final DioHttpProvider _api = const DioHttpProvider();
 
-  Future<List<Location>> getLocations(String text) async {
+  Future<List<Location>> getLocations(String text, {String lang = ''}) async {
     final req = {
       'q': text,
+      if (lang.isNotEmpty) 'lang': lang,
     };
 
     final res = await _api.dioGetRequest(ApiPath.search, query: req);

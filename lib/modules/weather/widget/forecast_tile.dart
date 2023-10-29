@@ -112,6 +112,6 @@ class ForecastHourTile extends ConsumerWidget with ConversionMixin {
   String getHourText(DateTime time) {
     if (time.hour == DateTime.now().hour) return 'Now';
 
-    return DateFormat('hh:mm').format(time);
+    return DateFormat('j').format(time);
   }
 }

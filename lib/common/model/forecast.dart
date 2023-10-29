@@ -53,7 +53,6 @@ class Forecast {
   }
 
   factory Forecast.fromMap(Map<String, dynamic> map) {
-    print(map['date_epoch']);
     return Forecast(
       date: map['date'] ?? '',
       dateEpoch: map['date_epoch'] ,

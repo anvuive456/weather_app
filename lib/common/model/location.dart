@@ -24,12 +24,8 @@ class Location {
       (other is Location &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          name == other.name &&
-          region == other.region &&
-          country == other.country &&
           lat == other.lat &&
-          lon == other.lon &&
-          url == other.url);
+          lon == other.lon);
 
   @override
   int get hashCode =>

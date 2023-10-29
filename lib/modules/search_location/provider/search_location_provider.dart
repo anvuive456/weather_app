@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/common/general_utils/extension.dart';
 import 'package:weather_app/common/network/app_respsonse.dart';
+import 'package:weather_app/modules/setting/provider/setting_provider.dart';
 
 import '../../../common/general_utils/debouncer.dart';
 import '../../../common/model/base_state.dart';
@@ -64,9 +65,11 @@ class SearchLocationState extends BaseState {
 }
 
 class SearchLocationNotifier extends StateNotifier<SearchLocationState> {
-  SearchLocationNotifier([this._locationService = const LocationService()])
+  SearchLocationNotifier(
+      [this._locationService = const LocationService(), this.lang = ''])
       : super(const SearchLocationState.init());
   final LocationService _locationService;
+  final String lang;
 
   final _debouncer = Debouncer(delay: 800);
 
@@ -98,5 +101,11 @@ class SearchLocationNotifier extends StateNotifier<SearchLocationState> {
 
 var searchLocationProvider =
     StateNotifierProvider<SearchLocationNotifier, SearchLocationState>((ref) {
-  return SearchLocationNotifier();
+  String lang =
+      ref.watch(settingProvider.select((value) => value.language.code));
+
+  return SearchLocationNotifier(
+    LocationService(),
+    lang
+  );
 });

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:weather_app/common/mixin/setting_mixin.dart';
+import 'package:weather_app/common/model/location.dart';
 import 'package:weather_app/common/navigation/route_paths.dart';
 import 'package:weather_app/common/widget/app_button.dart';
 import 'package:weather_app/modules/weather/provider/local_location_provider.dart';
@@ -19,6 +20,30 @@ class WeatherScreen extends ConsumerStatefulWidget {
 class _WeatherScreenState extends ConsumerState<WeatherScreen>
     with AppSettingMixin {
   final _pageController = PageController();
+
+  @override
+  void initState() {
+    ref.listenManual(localLocationsProvider, (previous, next) {
+      //if removed all pages then navigate to search screen
+      if (next.locations.isEmpty) {
+        context.goNamed(RoutePaths.search);
+      }
+
+      //handle added location
+      if (previous != null) {
+        _handleAddedLocation(previous.locations, next.locations);
+      }
+    });
+    super.initState();
+  }
+
+  _handleAddedLocation(
+      List<Location> prevLocations, List<Location> nextLocations) {
+    if (prevLocations.length < nextLocations.length) {
+      _pageController.animateToPage(nextLocations.length,
+          duration: Duration(milliseconds: 300), curve: Curves.ease);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +77,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen>
                       color: AppColors.white,
                     ),
                     onTap: () {
-                      context.goNamed(RoutePaths.search);
+                      context.pushNamed(RoutePaths.search);
                     },
                   ),
                   settingIcon
