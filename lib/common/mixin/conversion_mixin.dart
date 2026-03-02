@@ -1,4 +1,4 @@
-import 'package:weather_app/common/app_constants.dart';
+import 'package:weather_app/core/constants/app_constants.dart';
 
 mixin ConversionMixin {
   String getDegree(DegreeType type, double tempC, double tempF) {

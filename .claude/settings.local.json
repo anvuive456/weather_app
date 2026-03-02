@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fvm flutter analyze --no-fatal-infos)",
+      "Bash(fvm flutter pub get)",
+      "Bash(fvm flutter analyze lib/features/setting/presentation/screens/setting_dialog.dart --no-fatal-infos)"
+    ]
+  }
+}

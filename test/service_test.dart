@@ -1,12 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/common/service/location_service.dart';
+import 'package:weather_app/features/location/data/datasources/location_remote_datasource.dart';
 
 void main() {}
 
 void testLocationService() {
-
-  final LocationService service = LocationService();
+  final LocationRemoteDatasource datasource = const LocationRemoteDatasource();
   test('Test get locations', () async {
-    final res = await service.getLocations('London');
+    await datasource.searchLocations('London');
   });
 }

@@ -1,0 +1,64 @@
+import 'package:dio/dio.dart';
+import 'package:weather_app/core/constants/app_constants.dart';
+
+import 'app_response.dart';
+
+class AppInterceptor implements InterceptorsWrapper {
+  AppInterceptor();
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    DioException nextErr = err;
+
+    switch (err.type) {
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.connectionError:
+      case DioExceptionType.unknown:
+        nextErr = err.copyWith(
+            requestOptions: err.requestOptions, error: const TimeOutResponse());
+        break;
+      default:
+        //handle 500 errors
+        if ((err.response?.statusCode ?? 0) >= 500) {
+          nextErr = err.copyWith(
+            error: const ErrorResponse(
+              errorCode: 0,
+              detail: 'Cannot connect to service',
+            ),
+          );
+        } else {
+          nextErr = err.copyWith(
+              error: ErrorResponse(
+            errorCode: err.response?.statusCode ?? 0,
+            detail:
+                'ERROR: ${err.response?.statusCode} ${err.response?.data.toString()}',
+          ));
+        }
+    }
+    return handler.next(nextErr);
+  }
+
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    var newOptions = options.copyWith(queryParameters: {
+      'key': kWeatherApiKey,
+      ...options.queryParameters,
+    });
+    return handler.next(newOptions);
+  }
+
+  @override
+  void onResponse(
+      Response<dynamic> response, ResponseInterceptorHandler handler) {
+    final data = AppResponse.map(response);
+
+    return handler.next(
+      Response<AppResponse>(
+        requestOptions: response.requestOptions,
+        data: data,
+      ),
+    );
+  }
+}
